@@ -161,5 +161,3 @@ cython_debug/
 
 #flask gitignore
 *.pyc
-
-.DS_Store
