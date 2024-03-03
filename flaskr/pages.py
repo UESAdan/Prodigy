@@ -20,20 +20,28 @@ def create_app():
 
 @bp.route('/', methods =['GET', 'POST'])
 def index():
-    # db = get_db()
-    # posts = db.execute(
-    #     'SELECT p.id, title, body, created, author_id, username'
-    #     ' FROM post p JOIN user u ON p.author_id = u.id'
-    #     ' ORDER BY created DESC'
-    # ).fetchall()
     return render_template('pages/index.html')#, posts=posts)
 
 @bp.route('/home', methods =['GET', 'POST'])
 def home():
-    # db = get_db()
-    # posts = db.execute(
-    #     'SELECT p.id, title, body, created, author_id, username'
-    #     ' FROM post p JOIN user u ON p.author_id = u.id'
-    #     ' ORDER BY created DESC'
-    # ).fetchall()
     return render_template('pages/home.html')#, posts=posts)
+
+@bp.route('/profile', methods =['GET', 'POST'])
+def profile():
+    cards = []
+
+    for card_number in range(1, 7):  # Adjust the range as needed
+        card = {
+            'title': f'Name: {card_number}',
+            'events': [
+                {'name': f'Event {i}', 'description': f'Description for Event {i}'}
+                for i in range(1, 4)  # Adjust the range as needed
+            ]
+        }
+        cards.append(card)
+
+    return render_template('pages/profile.html', cards=cards)
+
+@bp.route('/register_child', methods =['GET', 'POST'])
+def register_child():
+    return render_template('pages/register_child.html')#, posts=posts)
