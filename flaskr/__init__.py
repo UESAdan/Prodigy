@@ -1,48 +1,42 @@
-from flask import Flask, render_template, request, redirect, url_for
+import os
 
-app = Flask(__name__)
+from flask import Flask
 
-# In-memory storage for user data (replace this with a database in a real application)
-users = []
 
-@app.route('/', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        confirm_password = request.form['confirm_password']
+def create_app(test_config=None):
+    # create and configure the app
+    app = Flask(__name__, instance_relative_config=True)
+    app.config.from_mapping(
+        SECRET_KEY='dev',
+        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+    )
 
-        if password != confirm_password:
-            return render_template('register.html', error='Passwords do not match')
+    if test_config is None:
+        # load the instance config, if it exists, when not testing
+        app.config.from_pyfile('config.py', silent=True)
+    else:
+        # load the test config if passed in
+        app.config.from_mapping(test_config)
 
-        # Check if the username is already taken
-        if any(user['username'] == username for user in users):
-            return render_template('register.html', error='Username already taken')
+    # ensure the instance folder exists
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass
 
-        # Store the user data (in-memory storage for demonstration purposes)
-        users.append({'username': username, 'password': password})
+    @app.route('/hello')
+    def hello():
+        return 'Hello, World!'
 
-        # Redirect to login page after successful registration
-        return redirect(url_for('login'))
+    from . import db
+    db.init_app(app)
 
-    return render_template('register.html')
+    from . import auth
+    app.register_blueprint(auth.bp)
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+    # from . import pages
+    # app.register_blueprint(pages.bp)
 
-        # Check if the user exists and the password is correct
-        user = next((user for user in users if user['username'] == username and user['password'] == password), None)
+    app.add_url_rule('/', endpoint='auth.register')
 
-        if user:
-            # Redirect to the home page after successful login
-            return render_template('index.html', username=username)
-        else:
-            return render_template('login.html', error='Invalid username or password')
-
-    return render_template('login.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    return app
