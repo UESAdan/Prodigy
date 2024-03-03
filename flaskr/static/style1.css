@@ -1,4 +1,4 @@
-  body {
+  #lr_body {
     max-width: 400px; /* Adjust the max-width as needed */
     margin: 0 auto;
     background: white;
@@ -9,13 +9,7 @@
     height: 75vh;
   }
   
-  h2 {
-    font-family: serif;
-    color: #377ba8;
-    margin: 1rem 0;
-  }
-  
-  form {
+  #lr {
     width: 100%;
     max-width: 300px; /* Adjust the max-width as needed */
     padding: 1rem;
@@ -24,26 +18,21 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
-  label {
-    font-weight: bold;
-    margin-bottom: 0.5em;
-  }
-  
-  input {
+  #username, #email , #password {
     width: 100%;
     padding: 0.5em;
     margin-bottom: 1em;
     box-sizing: border-box;
   }
   
-  input[type="submit"] {
+  #lr_submit {
     align-self: center; /* Center the submit button */
     color: #fff; /* Text color */
     font-family: serif;
     font-weight: bold; /* Make the font thicker */
     margin: 1rem 0;
     min-width: 10em;
-    background-color: #377ba8; /* Background color */
+    background-color: forestgreen; /* Background color */
     border: none; /* Remove default button border */
     padding: 0.5em; /* Adjust padding as needed */
     border-radius: 5px; /* Optional: Add border-radius for rounded corners */

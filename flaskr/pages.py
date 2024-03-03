@@ -18,7 +18,7 @@ def create_app():
 
     return app
 
-@bp.route('/')
+@bp.route('/', methods =['GET', 'POST'])
 def index():
     # db = get_db()
     # posts = db.execute(
@@ -27,3 +27,13 @@ def index():
     #     ' ORDER BY created DESC'
     # ).fetchall()
     return render_template('pages/index.html')#, posts=posts)
+
+@bp.route('/home', methods =['GET', 'POST'])
+def home():
+    # db = get_db()
+    # posts = db.execute(
+    #     'SELECT p.id, title, body, created, author_id, username'
+    #     ' FROM post p JOIN user u ON p.author_id = u.id'
+    #     ' ORDER BY created DESC'
+    # ).fetchall()
+    return render_template('pages/home.html')#, posts=posts)
