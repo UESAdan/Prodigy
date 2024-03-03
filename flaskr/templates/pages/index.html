@@ -1,15 +1,68 @@
 {% block header %}
-  <style>
+<style>
     h1 {
-      text-align: center;
+        text-align: center;
+        font-size: 8em; /* Increase the font size */
     }
-  </style>
-  <h1>{% block title %}Prodigy{% endblock %}</h1>
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px; /* Adjust the spacing between buttons */
+    }
+
+    button {
+        background-color: forestgreen;
+        color: white;
+        padding: 30px 100px; /* Increase the padding to make the buttons bigger */
+        border: none;
+        cursor: pointer;
+        border-radius: 12px;
+        font-size: 30px;
+    }
+
+    p {
+        text-align: center;
+        font-size: 2em; /* Increase the font size */
+        margin-top: 10px; /* Decrease the spacing between the header and paragraph */
+    }
+
+
+    body {
+        max-width: 550px;
+        /* Adjust the max-width as needed */
+        margin: 0 auto;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 85vh;
+        background-image: url(https://marketplace.canva.com/EADao-idQPQ/1/0/1600w/canva-lime-green-gradient-background-RM8dZAN1_xU.jpg);
+        background-size: cover;
+    }
+
+    img {
+        display: block;
+        margin: 0 auto; /* Center the image */
+        width: 200px; /* Increase the image size */
+        height: 200px; /* Increase the image size */
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-  <p>Welcome to Your App Name!</p>
+<img src="/static/prodigymonkey.png" alt="Logo">
 
-  <a href="{{ url_for('auth.login') }}"><button>Login</button></a>
-  <a href="{{ url_for('auth.register') }}"><button>Register</button></a>
+<body>
+    <h1>{% block title %}Prodigy{% endblock %}</h1>
+
+
+    <!-- <p>Welcome to Your App Name!</p> -->
+
+    <div class="button-container">
+        <a href="{{ url_for('auth.login') }}"><button>Login</button></a>
+        <a href="{{ url_for('auth.register') }}"><button>Register</button></a>
+    </div>
+</body>
 {% endblock %}
