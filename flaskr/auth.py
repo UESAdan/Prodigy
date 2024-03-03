@@ -17,7 +17,7 @@ import openai
 from googlesearch import search
 
 def search(age = 5, location = "", passion = ""):
-    openai.api_key = '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'
+    openai.api_key = ''
 
     messages = [ {"role": "system", "content":  
                 "You are a intelligent assistant."} ] 
@@ -146,7 +146,7 @@ def register_child():
             except db.IntegrityError:
                 error = f"Child {child_name} with profession {child_profession} is already registered for this user."
             else:
-                return redirect(url_for('pages.profile'))  
+                return redirect(url_for('pages.home'))  
 
         if error:
             flash(error)

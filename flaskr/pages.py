@@ -30,10 +30,6 @@ def index():
 
 @bp.route('/home', methods =['GET', 'POST'])
 def home():
-    return render_template('pages/home.html')#, posts=posts)
-
-@bp.route('/profile', methods =['GET', 'POST'])
-def profile():
     db = get_db()
     user_id = session.get('user_id')
 
@@ -42,7 +38,7 @@ def profile():
     ).fetchall()
     
     
-    return render_template('pages/profile.html', posts=posts)
+    return render_template('pages/home.html', posts=posts)
 
 
 
