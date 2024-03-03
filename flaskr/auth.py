@@ -17,7 +17,7 @@ import openai
 from googlesearch import search
 
 def search(age = 5, location = "", passion = ""):
-    openai.api_key = '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'
+    openai.api_key = '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'
 
     messages = [ {"role": "system", "content":  
                 "You are a intelligent assistant."} ] 
