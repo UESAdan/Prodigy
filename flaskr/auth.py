@@ -75,6 +75,7 @@ def login():
 
     return render_template('auth/login.html')
 
+
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
@@ -85,6 +86,45 @@ def load_logged_in_user():
         g.user = get_db().execute(
             'SELECT * FROM users WHERE user_id = ?', (user_id,)
         ).fetchone()
+
+@bp.route('/register_child', methods =['GET', 'POST'])
+def register_child():
+    if request.method == 'POST':
+        child_name = request.form['name']
+        child_profession = request.form['profession']
+        child_age = request.form['age']
+        
+        # Assuming you store the logged-in user's ID in session['user_id']
+        user_id = session.get('user_id')
+        
+        db = get_db()
+        error = None
+
+        if not user_id:
+            error = "User must be logged in to register a child."
+        elif not child_name:
+            error = "Child's name is required."
+        elif not child_profession:
+            error = "Child's profession is required."
+        elif not child_age:
+            error = "Child's age is required."
+        else:
+            try:
+                db.execute(
+                    "INSERT INTO kids (user_id, name, profession, age) VALUES (?,?,?,?)",
+                    (user_id, child_name, child_profession, child_age),
+                )
+                db.commit()
+            except db.IntegrityError:
+                error = f"Child {child_name} with profession {child_profession} is already registered for this user."
+            else:
+                return redirect(url_for('pages.profile'))  
+
+        if error:
+            flash(error)
+
+    # If GET request or there is an error, show the registration page again
+    return render_template('auth/register_child.html')
 
 @bp.route('/logout')
 def logout():
