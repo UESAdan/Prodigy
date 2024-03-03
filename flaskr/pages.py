@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, session, request, url_for
 )
 from werkzeug.exceptions import abort
 
@@ -28,20 +28,14 @@ def home():
 
 @bp.route('/profile', methods =['GET', 'POST'])
 def profile():
-    cards = []
+    db = get_db()
+    user_id = session.get('user_id')
 
-    for card_number in range(1, 7):  # Adjust the range as needed
-        card = {
-            'title': f'Name: {card_number}',
-            'events': [
-                {'name': f'Event {i}', 'description': f'Description for Event {i}'}
-                for i in range(1, 4)  # Adjust the range as needed
-            ]
-        }
-        cards.append(card)
+    posts = db.execute(
+        'SELECT name,profession,age FROM kids WHERE user_id = ?', (user_id,)
+    ).fetchall()
 
-    return render_template('pages/profile.html', cards=cards)
+    return render_template('pages/profile.html', posts=posts)
 
-@bp.route('/register_child', methods =['GET', 'POST'])
-def register_child():
-    return render_template('pages/register_child.html')#, posts=posts)
+
+
