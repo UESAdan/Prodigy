@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+  <h1>{% block title %}Register Child{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<style>
+    #lr_body {
+    max-width: 400px; /* Adjust the max-width as needed */
+    margin: 0 auto;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+  }
+  
+  #lr {
+    width: 100%;
+    max-width: 300px; /* Adjust the max-width as needed */
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+    #name, #profession, #age{
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    box-sizing: border-box;
+  }
+  
+  #lr_submit {
+    align-self: center; /* Center the submit button */
+    color: #fff; /* Text color */
+    font-family: serif;
+    font-weight: bold; /* Make the font thicker */
+    margin: 1rem 0;
+    min-width: 10em;
+    background-color: forestgreen; /* Background color */
+    border: none; /* Remove default button border */
+    padding: 0.5em; /* Adjust padding as needed */
+    border-radius: 5px; /* Optional: Add border-radius for rounded corners */
+    cursor: pointer; /* Add pointer cursor on hover */
+  }
+  
+</style>
+
+
+<body id = "lr_body">
+  <form method="post" id = "lr">
+    <label for="name" >Name</label>
+    <input name="name" id="name" required>
+
+    <label for="profession">Profession</label>
+    <input type="profession" name="profession" id="profession" required>
+    
+    <label for="age">Age</label>
+    <input type="age" name="age" id="age" required>
+    <input type="submit" id = "lr_submit" value="Register">
+  </form>
+</body>
+ 
+{% endblock %}
+
