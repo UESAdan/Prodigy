@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Home Page
+{% endblock %}
+
+{% block content %}
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#">Your Logo</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+                  </li>
+              </ul>
+          </div>
+          <div class="navbar-nav ml-auto">
+              <a class="nav-link" href="#" id="logoutButton">Logout</a>
+          </div>
+      </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h1>New Post</h1>
+    <form method="post">
+      <label for="title">Title</label>
+      <input name="title" id="title" value="{{ request.form['title'] }}" required>
+      <label for="body">Body</label>
+      <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
+      <input type="submit" value="Save">
+    </form>
+  </div>
+
+  <!-- Bootstrap JavaScript and Popper.js files (place them before the closing </body> tag) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Your custom script for handling logout -->
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          document.getElementById('logoutButton').addEventListener('click', function () {
+              // Perform a logout action here, for example, redirecting to the login page
+              window.location.href = "{{ url_for('login') }}";
+          });
+      });
+  </script>
+{% endblock %}
