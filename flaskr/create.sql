@@ -16,6 +16,8 @@ CREATE TABLE kids(
     name TEXT NOT NULL,
     profession TEXT NOT NULL,
     age INTEGER,
+    location TEXT NOT NULL,
+    programs TEXT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     UNIQUE(user_id, name, profession) -- Ensures each combination of user_id, name, and profession is unique
 );
