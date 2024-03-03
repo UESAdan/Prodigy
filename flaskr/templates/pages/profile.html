@@ -12,7 +12,7 @@
     }
 
     .card {
-      width: 300px; /* Adjust the width of each card */
+      width: px; /* Adjust the width of each card */
       /* Optionally, you can add additional styling to the cards */
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -22,10 +22,13 @@
       padding: 10px; /* Adjust the padding inside the card body */
     }
 
+    /* Ensure the button is always at the bottom */
     .center-button {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px; /* Adjust the margin from the cards */
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 15px; /* Optional: Add some margin for better spacing */
     }
   </style>
 
